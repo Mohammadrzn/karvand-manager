@@ -1,0 +1,52 @@
+{
+    "bootcamp": {
+        "title": "Karvand Python",
+        "year": 2026
+    },
+    "karvands": [
+        {
+            "id": 1,
+            "full_name": "mohammad bagher rezanejad",
+            "email": "test@test.test",
+            "city": "tehran",
+            "education": {
+                "degree": "bachloar",
+                "field": "CS"
+            },
+            "skills": [
+                {
+                    "name": "python",
+                    "level": "mid",
+                    "score": 70
+                },
+                {
+                    "name": "JS",
+                    "level": "mid",
+                    "score": 75
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "full_name": "jadi mirmirani",
+            "email": "test@jadi.test",
+            "city": "tehran",
+            "education": {
+                "degree": "PHD",
+                "field": "CS"
+            },
+            "skills": [
+                {
+                    "name": "python",
+                    "level": "advanced",
+                    "score": 100
+                },
+                {
+                    "name": "git",
+                    "level": "advanced",
+                    "score": 100
+                }
+            ]
+        }
+    ]
+}
