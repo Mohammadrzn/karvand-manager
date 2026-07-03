@@ -17,13 +17,54 @@ def create_karvand(pk, full_name, email, city, education_degree, education_field
         "skills": skills
     }
 
+def search_karvand_by_id():
+    try:
+        with open("./data/karvands.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        if not data["karvands"]:
+            print("No karvands found.")
+            return
+
+        try:
+            search_id = int(input("Enter karvand id: "))
+        except ValueError:
+            print("ID must be a number.")
+            return
+
+        for karvand in data["karvands"]:
+            if karvand["id"] == search_id:
+                print("-" * 40)
+                print(f"ID: {karvand['id']}")
+                print(f"Name: {karvand['full_name']}")
+                print(f"Email: {karvand['email']}")
+                print(f"City: {karvand['city']}")
+                print(
+                    f"Education: {karvand['education']['degree']} - "
+                    f"{karvand['education']['field']}"
+                )
+
+                print("Skills:")
+                for skill in karvand["skills"]:
+                    print(
+                        f"  - {skill['name']} | "
+                        f"{skill['level']} | "
+                        f"{skill['score']}"
+                    )
+                return
+
+        print("Karvand not found.")
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No karvands found.")
 
 while True:
     command = input(
         "\nPlease enter your command:\n"
         "1. Add karvand\n"
         "2. Show karvands\n"
-        "3. Exit\n> "
+        "3. Search by id\n"
+        "4. Exit\n> "
     )
 
     match command:
@@ -125,6 +166,9 @@ while True:
                 print("No karvands found.")
 
         case "3":
+            search_karvand_by_id()
+
+        case "4":
             break
 
         case _:
