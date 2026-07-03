@@ -58,13 +58,57 @@ def search_karvand_by_id():
     except (FileNotFoundError, json.JSONDecodeError):
         print("No karvands found.")
 
+def search_karvand_by_skill():
+    try:
+        with open("./data/karvands.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+
+        if not data["karvands"]:
+            print("No karvands found.")
+            return
+
+        skill_name = input("Enter skill name: ").strip().lower()
+
+        found = False
+
+        for karvand in data["karvands"]:
+            for skill in karvand["skills"]:
+                if skill["name"].lower() == skill_name:
+                    found = True
+
+                    print("-" * 40)
+                    print(f"ID: {karvand['id']}")
+                    print(f"Name: {karvand['full_name']}")
+                    print(f"Email: {karvand['email']}")
+                    print(f"City: {karvand['city']}")
+                    print(
+                        f"Education: {karvand['education']['degree']} - "
+                        f"{karvand['education']['field']}"
+                    )
+
+                    print("Skills:")
+                    for s in karvand["skills"]:
+                        print(
+                            f"  - {s['name']} | "
+                            f"{s['level']} | "
+                            f"{s['score']}"
+                        )
+                    break
+
+        if not found:
+            print("No karvand found with this skill.")
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("No karvands found.")
+
 while True:
     command = input(
         "\nPlease enter your command:\n"
         "1. Add karvand\n"
         "2. Show karvands\n"
         "3. Search by id\n"
-        "4. Exit\n> "
+        "4. Search by skill\n"
+        "5. Exit\n> "
     )
 
     match command:
@@ -169,6 +213,9 @@ while True:
             search_karvand_by_id()
 
         case "4":
+            search_karvand_by_skill()
+
+        case "5":
             break
 
         case _:
